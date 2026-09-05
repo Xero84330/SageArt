@@ -1,0 +1,52 @@
+{
+    "name": "Syntax2",
+    "tokenColors": [
+        {
+            "scope": "comment",
+            "settings": {
+                "foreground": "#687864"
+            }
+        },
+        {
+            "scope": [
+                "keyword",
+                "storage",
+                "storage.type",
+                "storage.modifier"
+            ],
+            "settings": {
+                "foreground": "#7CB342"
+            }
+        },
+        {
+            "scope": [
+                "entity.name.function",
+                "support.function"
+            ],
+            "settings": {
+                "foreground": "#9CCC65"
+            }
+        },
+        {
+            "scope": [
+                "entity.name.type",
+                "entity.name.class"
+            ],
+            "settings": {
+                "foreground": "#CDDC39"
+            }
+        },
+        {
+            "scope": "string",
+            "settings": {
+                "foreground": "#C5D86D"
+            }
+        },
+        {
+            "scope": "constant.numeric",
+            "settings": {
+                "foreground": "#D4E157"
+            }
+        }
+    ]
+}

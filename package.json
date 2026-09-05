@@ -66,6 +66,26 @@
         "label": "Sage Custom",
         "uiTheme": "vs-dark",
         "path": "./themes/sage-custom.json"
+      },
+      {
+        "label": "Syntax1",
+        "uiTheme": "vs-dark",
+        "path": "./syntax/syntax1.json"
+      },
+      {
+        "label": "Syntax2",
+        "uiTheme": "vs-dark",
+        "path": "./syntax/syntax2.json"
+      },
+      {
+        "label": "Syntax3",
+        "uiTheme": "vs-dark",
+        "path": "./syntax/syntax3.json"
+      },
+      {
+        "label": "Syntax4",
+        "uiTheme": "vs-dark",
+        "path": "./syntax/syntax4.json"
       }
     ]
   },

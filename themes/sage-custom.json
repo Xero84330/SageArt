@@ -2,39 +2,39 @@
   "name": "Sage Custom",
   "colors": {
     "editor.background": "#0b1220",
-    "editor.foreground": "#d6e4ff",
-    "editorLineNumber.foreground": "#3d7fff",
+    "editor.foreground": "#0055ff",
+    "editorLineNumber.foreground": "#002266",
     "editorLineNumber.activeForeground": "#a1c7ff",
     "editorCursor.foreground": "#6ea8ff",
     "editor.selectionBackground": "#6ea8ff55",
     "editor.inactiveSelectionBackground": "#6ea8ff30",
     "editor.findMatchBackground": "#6ea8ff66",
     "activityBar.background": "#010204",
-    "activityBar.foreground": "#d6e4ff",
+    "activityBar.foreground": "#0055ff",
     "activityBar.activeBorder": "#6ea8ff",
-    "activityBar.inactiveForeground": "#3d7fff",
+    "activityBar.inactiveForeground": "#002266",
     "sideBar.background": "#080d17",
-    "sideBar.foreground": "#d6e4ff",
+    "sideBar.foreground": "#0055ff",
     "sideBarSectionHeader.background": "#101a2e",
     "titleBar.activeBackground": "#010204",
-    "titleBar.activeForeground": "#d6e4ff",
+    "titleBar.activeForeground": "#0055ff",
     "statusBar.background": "#010204",
-    "statusBar.foreground": "#d6e4ff",
+    "statusBar.foreground": "#0055ff",
     "statusBarItem.hoverBackground": "#101a2e",
     "button.background": "#6ea8ff",
     "button.foreground": "#000000",
     "button.hoverBackground": "#a1c7ff",
     "input.background": "#101a2e",
-    "input.foreground": "#d6e4ff",
+    "input.foreground": "#0055ff",
     "input.border": "#3b89ff",
     "focusBorder": "#6ea8ff",
     "list.activeSelectionBackground": "#6ea8ff55",
-    "list.activeSelectionForeground": "#d6e4ff",
+    "list.activeSelectionForeground": "#0055ff",
     "list.hoverBackground": "#9fd6b825",
     "panel.background": "#080d17",
-    "panel.border": "#d6e4ff20",
+    "panel.border": "#0055ff20",
     "terminal.background": "#04070d",
-    "terminal.foreground": "#d6e4ff"
+    "terminal.foreground": "#0055ff"
   },
   "tokenColors": [
     {
@@ -43,7 +43,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#3d7fff"
+        "foreground": "#002266"
       }
     },
     {
@@ -80,7 +80,7 @@
         "support.function"
       ],
       "settings": {
-        "foreground": "#d6e4ff"
+        "foreground": "#0055ff"
       }
     },
     {
@@ -98,7 +98,7 @@
         "variable.other"
       ],
       "settings": {
-        "foreground": "#bdd3ff"
+        "foreground": "#004de6"
       }
     },
     {
