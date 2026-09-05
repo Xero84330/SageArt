@@ -1,40 +1,40 @@
 {
   "name": "Sage Custom",
   "colors": {
-    "editor.background": "#0b1220",
-    "editor.foreground": "#d6e4ff",
-    "editorLineNumber.foreground": "#3d7fff",
-    "editorLineNumber.activeForeground": "#a1c7ff",
-    "editorCursor.foreground": "#6ea8ff",
-    "editor.selectionBackground": "#6ea8ff55",
-    "editor.inactiveSelectionBackground": "#6ea8ff30",
-    "editor.findMatchBackground": "#6ea8ff66",
-    "activityBar.background": "#010204",
-    "activityBar.foreground": "#d6e4ff",
-    "activityBar.activeBorder": "#6ea8ff",
-    "activityBar.inactiveForeground": "#3d7fff",
-    "sideBar.background": "#080d17",
-    "sideBar.foreground": "#d6e4ff",
-    "sideBarSectionHeader.background": "#101a2e",
-    "titleBar.activeBackground": "#010204",
-    "titleBar.activeForeground": "#d6e4ff",
-    "statusBar.background": "#010204",
-    "statusBar.foreground": "#d6e4ff",
-    "statusBarItem.hoverBackground": "#101a2e",
-    "button.background": "#6ea8ff",
-    "button.foreground": "#000000",
-    "button.hoverBackground": "#a1c7ff",
-    "input.background": "#101a2e",
-    "input.foreground": "#d6e4ff",
-    "input.border": "#3b89ff",
-    "focusBorder": "#6ea8ff",
-    "list.activeSelectionBackground": "#6ea8ff55",
-    "list.activeSelectionForeground": "#d6e4ff",
-    "list.hoverBackground": "#9fd6b825",
-    "panel.background": "#080d17",
-    "panel.border": "#d6e4ff20",
-    "terminal.background": "#04070d",
-    "terminal.foreground": "#d6e4ff"
+    "editor.background": "#240000",
+    "editor.foreground": "#ffc7c7",
+    "editorLineNumber.foreground": "#ff2e2e",
+    "editorLineNumber.activeForeground": "#ad0000",
+    "editorCursor.foreground": "#7a0000",
+    "editor.selectionBackground": "#7a000055",
+    "editor.inactiveSelectionBackground": "#7a000030",
+    "editor.findMatchBackground": "#7a000066",
+    "activityBar.background": "#000000",
+    "activityBar.foreground": "#ffc7c7",
+    "activityBar.activeBorder": "#7a0000",
+    "activityBar.inactiveForeground": "#ff2e2e",
+    "sideBar.background": "#0f0000",
+    "sideBar.foreground": "#ffc7c7",
+    "sideBarSectionHeader.background": "#2e0000",
+    "titleBar.activeBackground": "#000000",
+    "titleBar.activeForeground": "#ffc7c7",
+    "statusBar.background": "#000000",
+    "statusBar.foreground": "#ffc7c7",
+    "statusBarItem.hoverBackground": "#2e0000",
+    "button.background": "#7a0000",
+    "button.foreground": "#FFFFFF",
+    "button.hoverBackground": "#ad0000",
+    "input.background": "#2e0000",
+    "input.foreground": "#ffc7c7",
+    "input.border": "#470000",
+    "focusBorder": "#7a0000",
+    "list.activeSelectionBackground": "#7a000055",
+    "list.activeSelectionForeground": "#ffc7c7",
+    "list.hoverBackground": "#8a000025",
+    "panel.background": "#0f0000",
+    "panel.border": "#ffc7c720",
+    "terminal.background": "#0a0000",
+    "terminal.foreground": "#ffc7c7"
   },
   "tokenColors": [
     {
@@ -43,7 +43,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#3d7fff"
+        "foreground": "#ff2e2e"
       }
     },
     {
@@ -53,7 +53,7 @@
         "storage.type"
       ],
       "settings": {
-        "foreground": "#6ea8ff"
+        "foreground": "#7a0000"
       }
     },
     {
@@ -62,7 +62,7 @@
         "constant.other.symbol"
       ],
       "settings": {
-        "foreground": "#9fd6b8"
+        "foreground": "#8a0000"
       }
     },
     {
@@ -71,7 +71,7 @@
         "constant.language"
       ],
       "settings": {
-        "foreground": "#c3e5d2"
+        "foreground": "#bd0000"
       }
     },
     {
@@ -80,7 +80,7 @@
         "support.function"
       ],
       "settings": {
-        "foreground": "#d6e4ff"
+        "foreground": "#ffc7c7"
       }
     },
     {
@@ -89,7 +89,7 @@
         "entity.name.class"
       ],
       "settings": {
-        "foreground": "#a1c7ff"
+        "foreground": "#ad0000"
       }
     },
     {
@@ -98,7 +98,7 @@
         "variable.other"
       ],
       "settings": {
-        "foreground": "#bdd3ff"
+        "foreground": "#ffaeae"
       }
     },
     {
@@ -107,7 +107,7 @@
         "constant.other"
       ],
       "settings": {
-        "foreground": "#7bc79e"
+        "foreground": "#570000"
       }
     }
   ]
