@@ -1,6 +1,6 @@
 {
-  "name": "sage",
-  "displayName": "Sage",
+  "name": "sageart",
+  "displayName": "SageArt",
   "description": "A lightweight workspace customization tool for a cleaner VS Code environment.",
   "icon": "media/sage-icon.png",
   "version": "0.0.1",
@@ -33,7 +33,7 @@
       "activitybar": [
         {
           "id": "sage",
-          "title": "Customize your office",
+          "title": "Magic is here",
           "icon": "media/sage.svg"
         }
       ]
@@ -43,7 +43,7 @@
         {
           "type": "webview",
           "id": "sage.main",
-          "name": "Sage",
+          "name": "SageArt",
           "icon": "media/sage.svg"
         }
       ]
