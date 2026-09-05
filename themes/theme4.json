@@ -1,0 +1,58 @@
+{
+	"name": "Sage Theme 4",
+	"colors": {
+		"editor.background": "#1A1026",
+		"editor.foreground": "#F0E6FA",
+		"editorLineNumber.foreground": "#725A85",
+		"editorLineNumber.activeForeground": "#D0A1F5",
+
+		"activityBar.background": "#160C21",
+		"activityBar.foreground": "#E8D9F5",
+		"activityBar.activeBorder": "#B56DE8",
+
+		"sideBar.background": "#1C1029",
+		"sideBar.foreground": "#E5D5F0",
+
+		"titleBar.activeBackground": "#160C21",
+		"titleBar.activeForeground": "#F0E6FA",
+
+		"statusBar.background": "#160C21",
+		"statusBar.foreground": "#D1BDE0",
+
+		"button.background": "#8A4FC7",
+		"button.foreground": "#FFFFFF",
+		"button.hoverBackground": "#A260E0"
+	},
+	"tokenColors": [
+		{
+			"scope": "comment",
+			"settings": {
+				"foreground": "#80698F"
+			}
+		},
+		{
+			"scope": "keyword",
+			"settings": {
+				"foreground": "#D09AFF"
+			}
+		},
+		{
+			"scope": "string",
+			"settings": {
+				"foreground": "#BFE3B4"
+			}
+		},
+		{
+			"scope": "number",
+			"settings": {
+				"foreground": "#E0A8F5"
+			}
+		},
+		{
+			"scope": "function",
+			"settings": {
+				"foreground": "#E5C9F7"
+			}
+		}
+	]
+}

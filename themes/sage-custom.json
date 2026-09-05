@@ -1,0 +1,114 @@
+{
+  "name": "Sage Custom",
+  "colors": {
+    "editor.background": "#0b1220",
+    "editor.foreground": "#d6e4ff",
+    "editorLineNumber.foreground": "#3d7fff",
+    "editorLineNumber.activeForeground": "#a1c7ff",
+    "editorCursor.foreground": "#6ea8ff",
+    "editor.selectionBackground": "#6ea8ff55",
+    "editor.inactiveSelectionBackground": "#6ea8ff30",
+    "editor.findMatchBackground": "#6ea8ff66",
+    "activityBar.background": "#010204",
+    "activityBar.foreground": "#d6e4ff",
+    "activityBar.activeBorder": "#6ea8ff",
+    "activityBar.inactiveForeground": "#3d7fff",
+    "sideBar.background": "#080d17",
+    "sideBar.foreground": "#d6e4ff",
+    "sideBarSectionHeader.background": "#101a2e",
+    "titleBar.activeBackground": "#010204",
+    "titleBar.activeForeground": "#d6e4ff",
+    "statusBar.background": "#010204",
+    "statusBar.foreground": "#d6e4ff",
+    "statusBarItem.hoverBackground": "#101a2e",
+    "button.background": "#6ea8ff",
+    "button.foreground": "#000000",
+    "button.hoverBackground": "#a1c7ff",
+    "input.background": "#101a2e",
+    "input.foreground": "#d6e4ff",
+    "input.border": "#3b89ff",
+    "focusBorder": "#6ea8ff",
+    "list.activeSelectionBackground": "#6ea8ff55",
+    "list.activeSelectionForeground": "#d6e4ff",
+    "list.hoverBackground": "#9fd6b825",
+    "panel.background": "#080d17",
+    "panel.border": "#d6e4ff20",
+    "terminal.background": "#04070d",
+    "terminal.foreground": "#d6e4ff"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#3d7fff"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "storage",
+        "storage.type"
+      ],
+      "settings": {
+        "foreground": "#6ea8ff"
+      }
+    },
+    {
+      "scope": [
+        "string",
+        "constant.other.symbol"
+      ],
+      "settings": {
+        "foreground": "#9fd6b8"
+      }
+    },
+    {
+      "scope": [
+        "constant.numeric",
+        "constant.language"
+      ],
+      "settings": {
+        "foreground": "#c3e5d2"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#d6e4ff"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "entity.name.class"
+      ],
+      "settings": {
+        "foreground": "#a1c7ff"
+      }
+    },
+    {
+      "scope": [
+        "variable",
+        "variable.other"
+      ],
+      "settings": {
+        "foreground": "#bdd3ff"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "constant.other"
+      ],
+      "settings": {
+        "foreground": "#7bc79e"
+      }
+    }
+  ]
+}

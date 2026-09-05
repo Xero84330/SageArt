@@ -1,0 +1,46 @@
+{
+	"name": "Theme 2",
+	"colors": {
+		"editor.background": "#0B1714",
+		"editor.foreground": "#D7EEE7",
+		"editorLineNumber.foreground": "#49665E",
+		"editorLineNumber.activeForeground": "#7FD1BA",
+
+		"activityBar.background": "#07100E",
+		"activityBar.foreground": "#D7EEE7",
+		"activityBar.activeBorder": "#5CC8A5",
+
+		"sideBar.background": "#091512",
+		"sideBar.foreground": "#C8E2DA",
+
+		"titleBar.activeBackground": "#07100E",
+		"titleBar.activeForeground": "#D7EEE7",
+
+		"statusBar.background": "#07100E",
+		"statusBar.foreground": "#A8CEC2",
+
+		"button.background": "#287A64",
+		"button.foreground": "#FFFFFF",
+		"button.hoverBackground": "#349577"
+	},
+	"tokenColors": [
+		{
+			"scope": "comment",
+			"settings": {
+				"foreground": "#607D74"
+			}
+		},
+		{
+			"scope": "keyword",
+			"settings": {
+				"foreground": "#7FD1BA"
+			}
+		},
+		{
+			"scope": "string",
+			"settings": {
+				"foreground": "#B4DFA5"
+			}
+		}
+	]
+}

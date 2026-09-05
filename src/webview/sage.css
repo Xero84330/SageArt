@@ -1,0 +1,95 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 18px;
+	color: var(--vscode-foreground);
+	background: var(--vscode-sideBar-background);
+	font-family: var(--vscode-font-family);
+	font-size: 13px;
+}
+
+.header {
+	margin-bottom: 24px;
+}
+
+.title {
+	font-size: 21px;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.subtitle {
+	color: var(--vscode-descriptionForeground);
+	font-size: 12px;
+}
+
+.section {
+	margin-bottom: 24px;
+}
+
+.section-title {
+	font-size: 11px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--vscode-descriptionForeground);
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+}
+
+.theme-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+button {
+	font-family: inherit;
+	cursor: pointer;
+	border-radius: 6px;
+}
+
+.theme-button {
+	padding: 10px 8px;
+	border: 1px solid var(--vscode-button-border);
+	background: var(--vscode-button-background);
+	color: var(--vscode-button-foreground);
+	font-weight: 500;
+	transition: transform 0.08s ease, background 0.08s ease;
+}
+
+.theme-button:hover {
+	background: var(--vscode-button-hoverBackground);
+}
+
+.theme-button:active {
+	transform: scale(0.96);
+}
+
+.theme-button:focus-visible {
+	outline: 2px solid #FFFFFF;
+	outline-offset: 2px;
+}
+
+.custom-button {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 11px;
+	border: 1px solid var(--vscode-button-border);
+	background: var(--vscode-button-background);
+	color: var(--vscode-button-foreground);
+	font-weight: 500;
+}
+
+.custom-button:hover {
+	background: var(--vscode-button-hoverBackground);
+}
+
+.icon {
+	font-size: 14px;
+}

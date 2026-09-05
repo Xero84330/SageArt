@@ -1,0 +1,94 @@
+{
+  "name": "sage",
+  "displayName": "Sage",
+  "description": "A lightweight workspace customization tool for a cleaner VS Code environment.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.136.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sage.osho",
+        "title": "Osho"
+      },
+      {
+        "command": "sage.theme",
+        "title": "Theme"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sage",
+          "title": "Costumise your office",
+          "icon": "media/sage.svg"
+        }
+      ]
+    },
+    "views": {
+      "sage": [
+        {
+          "type": "webview",
+          "id": "sage.main",
+          "name": "Sage",
+          "icon": "media/sage.svg"
+        }
+      ]
+    },
+    "themes": [
+      {
+        "label": "Theme 1",
+        "uiTheme": "vs-dark",
+        "path": "./themes/theme1.json"
+      },
+      {
+        "label": "Theme 2",
+        "uiTheme": "vs-dark",
+        "path": "./themes/theme2.json"
+      },
+      {
+        "label": "Theme 3",
+        "uiTheme": "vs-dark",
+        "path": "./themes/theme3.json"
+      },
+      {
+        "label": "Theme 4",
+        "uiTheme": "vs-dark",
+        "path": "./themes/theme4.json"
+      },
+      {
+        "label": "Sage Custom",
+        "uiTheme": "vs-dark",
+        "path": "./themes/sage-custom.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.136.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
