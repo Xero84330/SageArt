@@ -1,106 +1,132 @@
 import * as vscode from 'vscode';
 import {
-    ThemeGenerator,
-    ThemeColors
+	ThemeGenerator,
+	ThemeColors
 } from './ThemeGenerator';
 
 export class CustomThemeProvider {
 
-    constructor(
-        private readonly extensionUri: vscode.Uri
-    ) { }
+	constructor(
+		private readonly context: vscode.ExtensionContext
+	) { }
 
-    open(): void {
+	open(): void {
 
-        const panel = vscode.window.createWebviewPanel(
-            'sage.customTheme',
-            'Custom Theme',
-            vscode.ViewColumn.One,
-            {
-                enableScripts: true,
-                localResourceRoots: [
-                    this.extensionUri
-                ]
-            }
-        );
+		const panel = vscode.window.createWebviewPanel(
+			'sage.customTheme',
+			'Custom Theme',
+			vscode.ViewColumn.One,
+			{
+				enableScripts: true,
+				localResourceRoots: [
+					this.context.extensionUri
+				]
+			}
+		);
 
-        panel.webview.html = this.getHtml(
-            panel.webview
-        );
+		panel.webview.html = this.getHtml(
+			panel.webview
+		);
 
-        panel.webview.onDidReceiveMessage(
-            async message => {
+		panel.webview.onDidReceiveMessage(
+			async message => {
 
-                if (message.command === 'applyTheme') {
+				if (message.command === 'applyTheme') {
 
-                    try {
+					try {
 
-                        await this.applyTheme(
-                            message.colors
-                        );
+						await this.applyTheme(
+							message.colors
+						);
 
-                        vscode.window.showInformationMessage(
-                            'Custom theme applied!'
-                        );
+						vscode.window.showInformationMessage(
+							'Custom theme applied!'
+						);
 
-                    } catch (error) {
+					} catch (error) {
 
-                        vscode.window.showErrorMessage(
-                            'Failed to apply custom theme.'
-                        );
+						vscode.window.showErrorMessage(
+							'Failed to apply custom theme.'
+						);
 
-                        console.error(error);
-                    }
-                }
-            }
-        );
-    }
+						console.error(error);
+					}
+				}
+			}
+		);
+	}
 
-    private async applyTheme(
-        colors: ThemeColors
-    ): Promise<void> {
+	private async applyTheme(
+		colors: ThemeColors
+	): Promise<void> {
 
-        const generator =
-            new ThemeGenerator();
+		const generator =
+			new ThemeGenerator();
 
-        const theme =
-            generator.generate(colors);
+		const theme =
+			generator.generate(colors) as {
+				colors: Record<string, string>;
+				tokenColors: Array<{
+					scope: string[];
+					settings: {
+						foreground: string;
+					};
+				}>;
+			};
 
-        const themeUri =
-            vscode.Uri.joinPath(
-                this.extensionUri,
-                'themes',
-                'sage-custom.json'
-            );
+		await vscode.workspace
+			.getConfiguration('workbench')
+			.update(
+				'colorCustomizations',
+				theme.colors,
+				vscode.ConfigurationTarget.Global
+			);
 
-        const data = Buffer.from(
-            JSON.stringify(
-                theme,
-                null,
-                2
-            ),
-            'utf8'
-        );
+		await vscode.workspace
+			.getConfiguration('editor')
+			.update(
+				'tokenColorCustomizations',
+				{
+					textMateRules:
+						theme.tokenColors
+				},
+				vscode.ConfigurationTarget.Global
+			);
 
-        await vscode.workspace.fs.writeFile(
-            themeUri,
-            data
-        );
+		await this.context.globalState.update(
+			'sage.customThemeColors',
+			colors
+		);
+	}
 
-        await vscode.workspace
-            .getConfiguration('workbench')
-            .update(
-                'colorTheme',
-                'Sage Custom',
-                vscode.ConfigurationTarget.Global
-            );
-    }
+	private getSavedColors(): ThemeColors {
 
-    private getHtml(
-        webview: vscode.Webview
-    ): string {
+		const saved =
+			this.context.globalState.get<ThemeColors>(
+				'sage.customThemeColors'
+			);
 
-        return `
+		if (saved) {
+			return saved;
+		}
+
+		return {
+			editor: '#0B1220',
+			accent: '#6EA8FF',
+			secondary: '#9FD6B8',
+			text: '#D6E4FF',
+			surface: '#080D17'
+		};
+	}
+
+	private getHtml(
+		webview: vscode.Webview
+	): string {
+
+		const colors =
+			this.getSavedColors();
+
+		return `
 			<!DOCTYPE html>
 			<html>
 
@@ -213,13 +239,13 @@ export class CustomThemeProvider {
 						font-weight: 500;
 						margin-bottom: 4px;
 					}
-                    
-                    .color-description {
-	color: var(--vscode-descriptionForeground);
-	font-size: 11px;
-	line-height: 1.4;
-	margin-bottom: 5px;
-}
+
+					.color-description {
+						color: var(--vscode-descriptionForeground);
+						font-size: 11px;
+						line-height: 1.4;
+						margin-bottom: 5px;
+					}
 
 					.color-value {
 						color: var(--vscode-descriptionForeground);
@@ -298,40 +324,40 @@ export class CustomThemeProvider {
 
 					<div class="color-grid">
 
-${this.getColorInput(
-            'editor',
-            'Editor',
-            '#0B1220',
-            'Main background of your code editor.'
-        )}
+						${this.getColorInput(
+			'editor',
+			'Editor',
+			colors.editor,
+			'Main background of your code editor.'
+		)}
 
-${this.getColorInput(
-            'accent',
-            'Accent',
-            '#6EA8FF',
-            'Highlights, selections, buttons, cursor, and active elements.'
-        )}
+						${this.getColorInput(
+			'accent',
+			'Accent',
+			colors.accent,
+			'Highlights, selections, buttons, cursor, and active elements.'
+		)}
 
-${this.getColorInput(
-            'secondary',
-            'Secondary',
-            '#9FD6B8',
-            'Supporting color for strings, numbers, and subtle highlights.'
-        )}
+						${this.getColorInput(
+			'secondary',
+			'Secondary',
+			colors.secondary,
+			'Supporting color for strings, numbers, and subtle highlights.'
+		)}
 
-${this.getColorInput(
-            'text',
-            'Text',
-            '#D6E4FF',
-            'Main text color throughout the editor and interface.'
-        )}
+						${this.getColorInput(
+			'text',
+			'Text',
+			colors.text,
+			'Main text color throughout the editor and interface.'
+		)}
 
-${this.getColorInput(
-            'surface',
-            'Surface',
-            '#080D17',
-            'Background for sidebars, panels, menus, and other UI areas.'
-        )}
+						${this.getColorInput(
+			'surface',
+			'Surface',
+			colors.surface,
+			'Background for sidebars, panels, menus, and other UI areas.'
+		)}
 
 					</div>
 
@@ -438,53 +464,52 @@ ${this.getColorInput(
 
 			</html>
 		`;
-    }
+	}
 
-    private getColorInput(
-        id: string,
-        name: string,
-        value: string,
-        description: string
-    ): string {
+	private getColorInput(
+		id: string,
+		name: string,
+		value: string,
+		description: string
+	): string {
 
-        return `
-		<div class="color-card">
-
-			<div
-				class="color-preview"
-				id="${id}Preview"
-				style="background: ${value};"
-			>
-
-				<input
-					type="color"
-					id="${id}"
-					value="${value}"
-				>
-
-			</div>
-
-			<div class="color-info">
-
-				<div class="color-name">
-					${name}
-				</div>
-
-				<div class="color-description">
-					${description}
-				</div>
+		return `
+			<div class="color-card">
 
 				<div
-					class="color-value"
-					id="${id}Value"
+					class="color-preview"
+					id="${id}Preview"
+					style="background: ${value};"
 				>
-					${value}
+
+					<input
+						type="color"
+						id="${id}"
+						value="${value}"
+					>
+
+				</div>
+
+				<div class="color-info">
+
+					<div class="color-name">
+						${name}
+					</div>
+
+					<div class="color-description">
+						${description}
+					</div>
+
+					<div
+						class="color-value"
+						id="${id}Value"
+					>
+						${value}
+					</div>
+
 				</div>
 
 			</div>
-
-		</div>
-	`;
-
-    }
+		`;
+	}
 }

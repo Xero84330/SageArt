@@ -6,7 +6,7 @@ import { CostumSyntaxTheme } from './CostumSyntaxTheme';
 export class SageViewProvider implements vscode.WebviewViewProvider {
 
     constructor(
-        private readonly extensionUri: vscode.Uri
+        private readonly context: vscode.ExtensionContext
     ) { }
 
     resolveWebviewView(
@@ -16,7 +16,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
         webviewView.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                this.extensionUri
+                this.context.extensionUri
             ]
         };
 
@@ -33,6 +33,22 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                             vscode.ConfigurationTarget.Global
                         );
 
+                    await vscode.workspace
+                        .getConfiguration('workbench')
+                        .update(
+                            'colorCustomizations',
+                            undefined,
+                            vscode.ConfigurationTarget.Global
+                        );
+
+                    await vscode.workspace
+                        .getConfiguration('editor')
+                        .update(
+                            'tokenColorCustomizations',
+                            undefined,
+                            vscode.ConfigurationTarget.Global
+                        );
+
                     return;
                 }
 
@@ -40,7 +56,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     const customThemeProvider =
                         new CustomThemeProvider(
-                            this.extensionUri
+                            this.context
                         );
 
                     customThemeProvider.open();
@@ -52,7 +68,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     const syntaxThemeProvider =
                         new SyntaxThemeProvider(
-                            this.extensionUri
+                            this.context.extensionUri
                         );
 
                     await syntaxThemeProvider.open(
@@ -66,7 +82,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     const costumSyntaxTheme =
                         new CostumSyntaxTheme(
-                            this.extensionUri
+                            this.context
                         );
 
                     costumSyntaxTheme.open();
@@ -87,7 +103,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
         const cssUri =
             webview.asWebviewUri(
                 vscode.Uri.joinPath(
-                    this.extensionUri,
+                    this.context.extensionUri,
                     'media',
                     'sage.css'
                 )
@@ -96,7 +112,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
         const jsUri =
             webview.asWebviewUri(
                 vscode.Uri.joinPath(
-                    this.extensionUri,
+                    this.context.extensionUri,
                     'media',
                     'sage.js'
                 )
@@ -123,7 +139,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
             </head>
 
-
             <body>
 
                 <!-- Themes -->
@@ -149,7 +164,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                         </div>
                     </div>
-
 
                     <div class="theme-grid">
 
@@ -183,7 +197,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     </div>
 
-
                     <div style="margin-top: 10px;">
 
                         <button
@@ -197,7 +210,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                     </div>
 
                 </div>
-
 
                 <!-- Syntax -->
 
@@ -222,7 +234,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                         </div>
                     </div>
-
 
                     <div class="theme-grid">
 
@@ -256,7 +267,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     </div>
 
-
                     <div style="margin-top: 10px;">
 
                         <button
@@ -270,7 +280,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                     </div>
 
                 </div>
-
 
                 <script src="${jsUri}"></script>
 

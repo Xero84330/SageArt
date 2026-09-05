@@ -1,9 +1,17 @@
 import * as vscode from 'vscode';
 
+interface SyntaxColors {
+    keyword: string;
+    function: string;
+    type: string;
+    string: string;
+    comment: string;
+}
+
 export class CostumSyntaxTheme {
 
     constructor(
-        private readonly extensionUri: vscode.Uri
+        private readonly context: vscode.ExtensionContext
     ) { }
 
     open(): void {
@@ -15,7 +23,7 @@ export class CostumSyntaxTheme {
             {
                 enableScripts: true,
                 localResourceRoots: [
-                    this.extensionUri
+                    this.context.extensionUri
                 ]
             }
         );
@@ -52,20 +60,11 @@ export class CostumSyntaxTheme {
         );
     }
 
-
     private async applySyntaxTheme(
-        colors: {
-            keyword: string;
-            function: string;
-            type: string;
-            string: string;
-            comment: string;
-        }
+        colors: SyntaxColors
     ): Promise<void> {
 
         const tokenColors = [
-
-            // Comments
 
             {
                 scope: [
@@ -77,9 +76,6 @@ export class CostumSyntaxTheme {
                     foreground: colors.comment
                 }
             },
-
-
-            // Keywords
 
             {
                 scope: [
@@ -94,9 +90,6 @@ export class CostumSyntaxTheme {
                 }
             },
 
-
-            // Functions
-
             {
                 scope: [
                     'entity.name.function',
@@ -108,9 +101,6 @@ export class CostumSyntaxTheme {
                     foreground: colors.function
                 }
             },
-
-
-            // Types / Classes
 
             {
                 scope: [
@@ -125,9 +115,6 @@ export class CostumSyntaxTheme {
                 }
             },
 
-
-            // Strings
-
             {
                 scope: [
                     'string',
@@ -141,37 +128,6 @@ export class CostumSyntaxTheme {
             }
         ];
 
-
-        const theme = {
-            name: 'Sage Custom Syntax',
-            tokenColors: tokenColors
-        };
-
-
-        const themeUri =
-            vscode.Uri.joinPath(
-                this.extensionUri,
-                'syntax',
-                'sage-custom-syntax.json'
-            );
-
-
-        const data = Buffer.from(
-            JSON.stringify(
-                theme,
-                null,
-                2
-            ),
-            'utf8'
-        );
-
-
-        await vscode.workspace.fs.writeFile(
-            themeUri,
-            data
-        );
-
-
         await vscode.workspace
             .getConfiguration('editor')
             .update(
@@ -181,12 +137,39 @@ export class CostumSyntaxTheme {
                 },
                 vscode.ConfigurationTarget.Global
             );
+
+        await this.context.globalState.update(
+            'sage.customSyntaxColors',
+            colors
+        );
     }
 
+    private getSavedColors(): SyntaxColors {
+
+        const saved =
+            this.context.globalState.get<SyntaxColors>(
+                'sage.customSyntaxColors'
+            );
+
+        if (saved) {
+            return saved;
+        }
+
+        return {
+            keyword: '#7FB069',
+            function: '#5DADE2',
+            type: '#48C9B0',
+            string: '#A8C66C',
+            comment: '#7F8C8D'
+        };
+    }
 
     private getHtml(
         webview: vscode.Webview
     ): string {
+
+        const colors =
+            this.getSavedColors();
 
         return `
             <!DOCTYPE html>
@@ -208,34 +191,23 @@ export class CostumSyntaxTheme {
                         box-sizing: border-box;
                     }
 
-
                     body {
                         margin: 0;
                         padding: 40px;
-
-                        color:
-                            var(--vscode-foreground);
-
-                        background:
-                            var(--vscode-editor-background);
-
-                        font-family:
-                            var(--vscode-font-family);
-
+                        color: var(--vscode-foreground);
+                        background: var(--vscode-editor-background);
+                        font-family: var(--vscode-font-family);
                         font-size: 13px;
                     }
-
 
                     .container {
                         max-width: 850px;
                         margin: 0 auto;
                     }
 
-
                     .header {
                         margin-bottom: 35px;
                     }
-
 
                     .title {
                         font-size: 28px;
@@ -244,208 +216,127 @@ export class CostumSyntaxTheme {
                         margin-bottom: 8px;
                     }
 
-
                     .subtitle {
-                        color:
-                            var(--vscode-descriptionForeground);
-
+                        color: var(--vscode-descriptionForeground);
                         font-size: 13px;
                         line-height: 1.5;
                     }
 
-
                     .section-title {
                         font-size: 11px;
                         font-weight: 600;
-
                         text-transform: uppercase;
-
                         letter-spacing: 0.8px;
-
-                        color:
-                            var(--vscode-descriptionForeground);
-
+                        color: var(--vscode-descriptionForeground);
                         margin-bottom: 12px;
                     }
 
-
                     .color-grid {
                         display: grid;
-
-                        grid-template-columns:
-                            repeat(2, 1fr);
-
+                        grid-template-columns: repeat(2, 1fr);
                         gap: 12px;
                     }
 
-
                     .color-card {
                         position: relative;
-
                         display: flex;
-
                         align-items: center;
-
                         gap: 14px;
-
                         padding: 14px;
-
-                        border:
-                            1px solid
-                            var(--vscode-panel-border);
-
+                        border: 1px solid var(--vscode-panel-border);
                         border-radius: 10px;
-
-                        background:
-                            var(--vscode-sideBar-background);
-
+                        background: var(--vscode-sideBar-background);
                         transition:
                             border-color 0.12s ease,
                             transform 0.12s ease;
                     }
 
-
                     .color-card:hover {
-                        border-color:
-                            var(--vscode-focusBorder);
-
-                        transform:
-                            translateY(-1px);
+                        border-color: var(--vscode-focusBorder);
+                        transform: translateY(-1px);
                     }
-
 
                     .color-preview {
                         position: relative;
-
                         width: 48px;
                         height: 48px;
-
                         flex-shrink: 0;
-
                         border-radius: 8px;
-
                         overflow: hidden;
-
-                        border:
-                            1px solid
-                            rgba(255, 255, 255, 0.15);
+                        border: 1px solid rgba(255, 255, 255, 0.15);
                     }
-
 
                     input[type="color"] {
                         position: absolute;
-
                         inset: 0;
-
                         width: 100%;
                         height: 100%;
-
                         padding: 0;
-
                         border: none;
-
                         opacity: 0;
-
                         cursor: pointer;
                     }
-
 
                     .color-info {
                         min-width: 0;
                     }
-
 
                     .color-name {
                         font-weight: 500;
                         margin-bottom: 4px;
                     }
 
-
                     .color-description {
-                        color:
-                            var(--vscode-descriptionForeground);
-
+                        color: var(--vscode-descriptionForeground);
                         font-size: 11px;
-
                         line-height: 1.4;
-
                         margin-bottom: 5px;
                     }
 
-
                     .color-value {
-                        color:
-                            var(--vscode-descriptionForeground);
-
-                        font-family:
-                            var(--vscode-editor-font-family);
-
+                        color: var(--vscode-descriptionForeground);
+                        font-family: var(--vscode-editor-font-family);
                         font-size: 12px;
                     }
 
-
                     .actions {
                         display: flex;
-
                         justify-content: flex-end;
-
                         margin-top: 30px;
                     }
 
-
                     .apply-button {
                         padding: 10px 22px;
-
-                        border:
-                            1px solid
-                            var(--vscode-button-border);
-
+                        border: 1px solid var(--vscode-button-border);
                         border-radius: 7px;
-
-                        background:
-                            var(--vscode-button-background);
-
-                        color:
-                            var(--vscode-button-foreground);
-
+                        background: var(--vscode-button-background);
+                        color: var(--vscode-button-foreground);
                         cursor: pointer;
-
                         font-family: inherit;
-
                         font-weight: 500;
-
                         transition:
                             transform 0.08s ease,
                             background 0.08s ease;
                     }
 
-
                     .apply-button:hover {
-                        background:
-                            var(--vscode-button-hoverBackground);
+                        background: var(--vscode-button-hoverBackground);
                     }
-
 
                     .apply-button:active {
-                        transform:
-                            scale(0.96);
+                        transform: scale(0.96);
                     }
-
 
                     .apply-button:focus-visible {
-                        outline:
-                            2px solid #FFFFFF;
-
+                        outline: 2px solid #FFFFFF;
                         outline-offset: 2px;
                     }
-
 
                     @media (max-width: 600px) {
 
                         body {
                             padding: 25px;
                         }
-
 
                         .color-grid {
                             grid-template-columns: 1fr;
@@ -456,7 +347,6 @@ export class CostumSyntaxTheme {
                 </style>
 
             </head>
-
 
             <body>
 
@@ -474,55 +364,48 @@ export class CostumSyntaxTheme {
 
                     </div>
 
-
                     <div class="section-title">
                         Syntax Colors
                     </div>
-
 
                     <div class="color-grid">
 
                         ${this.getColorInput(
             'keyword',
             'Keyword',
-            '#7FB069',
+            colors.keyword,
             'if, else, return, class, and other language keywords.'
         )}
-
 
                         ${this.getColorInput(
             'function',
             'Function',
-            '#5DADE2',
+            colors.function,
             'Functions and methods in your code.'
         )}
-
 
                         ${this.getColorInput(
             'type',
             'Type',
-            '#48C9B0',
+            colors.type,
             'Classes, types, interfaces, and related declarations.'
         )}
-
 
                         ${this.getColorInput(
             'string',
             'String',
-            '#A8C66C',
+            colors.string,
             'Text and string literals inside your code.'
         )}
-
 
                         ${this.getColorInput(
             'comment',
             'Comment',
-            '#7F8C8D',
+            colors.comment,
             'Comments and documentation in your code.'
         )}
 
                     </div>
-
 
                     <div class="actions">
 
@@ -537,12 +420,10 @@ export class CostumSyntaxTheme {
 
                 </div>
 
-
                 <script>
 
                     const vscode =
                         acquireVsCodeApi();
-
 
                     const colors = [
                         'keyword',
@@ -551,7 +432,6 @@ export class CostumSyntaxTheme {
                         'string',
                         'comment'
                     ];
-
 
                     colors.forEach(name => {
 
@@ -568,7 +448,6 @@ export class CostumSyntaxTheme {
                                 name + 'Value'
                             );
 
-
                         input.addEventListener(
                             'input',
                             () => {
@@ -583,7 +462,6 @@ export class CostumSyntaxTheme {
                         );
 
                     });
-
 
                     function applySyntaxTheme() {
 
@@ -616,7 +494,6 @@ export class CostumSyntaxTheme {
 
                         };
 
-
                         vscode.postMessage({
 
                             command:
@@ -636,7 +513,6 @@ export class CostumSyntaxTheme {
             </html>
         `;
     }
-
 
     private getColorInput(
         id: string,
@@ -662,18 +538,15 @@ export class CostumSyntaxTheme {
 
                 </div>
 
-
                 <div class="color-info">
 
                     <div class="color-name">
                         ${name}
                     </div>
 
-
                     <div class="color-description">
                         ${description}
                     </div>
-
 
                     <div
                         class="color-value"
