@@ -1,5 +1,13 @@
-out
-dist
-node_modules
+node_modules/
+out/
+dist/
 .vscode-test/
 *.vsix
+
+.env
+.env.*
+!.env.example
+
+*.log
+.DS_Store
+Thumbs.db

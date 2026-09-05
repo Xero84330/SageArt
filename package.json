@@ -3,6 +3,11 @@
   "displayName": "Sage",
   "description": "A lightweight workspace customization tool for a cleaner VS Code environment.",
   "version": "0.0.1",
+  "publisher": "SaketSingh7281j",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Xero84330/Sage.git"
+  },
   "engines": {
     "vscode": "^1.136.0"
   },
