@@ -17,7 +17,10 @@ export class CustomThemeProvider {
             'Custom Theme',
             vscode.ViewColumn.One,
             {
-                enableScripts: true
+                enableScripts: true,
+                localResourceRoots: [
+                    this.extensionUri
+                ]
             }
         );
 

@@ -14,7 +14,10 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
     ): void {
 
         webviewView.webview.options = {
-            enableScripts: true
+            enableScripts: true,
+            localResourceRoots: [
+                this.extensionUri
+            ]
         };
 
         webviewView.webview.onDidReceiveMessage(
@@ -33,7 +36,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                     return;
                 }
 
-
                 if (message.command === 'customTheme') {
 
                     const customThemeProvider =
@@ -45,7 +47,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     return;
                 }
-
 
                 if (message.command === 'syntaxTheme') {
 
@@ -60,7 +61,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     return;
                 }
-
 
                 if (message.command === 'customSyntaxTheme') {
 
@@ -80,7 +80,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
             this.getHtml(webviewView.webview);
     }
 
-
     private getHtml(
         webview: vscode.Webview
     ): string {
@@ -89,8 +88,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
             webview.asWebviewUri(
                 vscode.Uri.joinPath(
                     this.extensionUri,
-                    'src',
-                    'webview',
+                    'media',
                     'sage.css'
                 )
             );
@@ -99,8 +97,7 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
             webview.asWebviewUri(
                 vscode.Uri.joinPath(
                     this.extensionUri,
-                    'src',
-                    'webview',
+                    'media',
                     'sage.js'
                 )
             );
@@ -133,8 +130,24 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                 <div class="section">
 
-                    <div class="section-title">
-                        Select Theme
+                    <div class="section-header">
+                        <span class="section-title">Select Theme</span>
+
+                        <div class="info-wrapper">
+
+                            <button
+                                class="info-btn"
+                                aria-label="Theme Info"
+                                tabindex="0"
+                            >
+                                i
+                            </button>
+
+                            <div class="info-tooltip">
+                                Changes the entire IDE appearance including editor, sidebars, activity bar, and panels.
+                            </div>
+
+                        </div>
                     </div>
 
 
@@ -147,14 +160,12 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                             Sapphire
                         </button>
 
-
                         <button
                             class="theme-button"
                             onclick="selectTheme('Theme 2')"
                         >
-                            Emerland
+                            Emerald
                         </button>
-
 
                         <button
                             class="theme-button"
@@ -162,7 +173,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                         >
                             Onyx
                         </button>
-
 
                         <button
                             class="theme-button"
@@ -173,18 +183,18 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                     </div>
 
-                </div>
 
+                    <div style="margin-top: 10px;">
 
-                <div class="section">
+                        <button
+                            class="custom-button"
+                            onclick="createCustomTheme()"
+                        >
+                            <span class="icon">⚙</span>
+                            Create Custom Theme
+                        </button>
 
-                    <button
-                        class="custom-button"
-                        onclick="createCustomTheme()"
-                    >
-                        <span class="icon">⚙</span>
-                        Create Custom Theme
-                    </button>
+                    </div>
 
                 </div>
 
@@ -193,8 +203,24 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
 
                 <div class="section">
 
-                    <div class="section-title">
-                        Choose Syntax Style
+                    <div class="section-header">
+                        <span class="section-title">Choose Syntax Style</span>
+
+                        <div class="info-wrapper">
+
+                            <button
+                                class="info-btn"
+                                aria-label="Syntax Info"
+                                tabindex="0"
+                            >
+                                i
+                            </button>
+
+                            <div class="info-tooltip">
+                                Customizes code syntax highlighting such as keywords, functions, types, strings, and comments.
+                            </div>
+
+                        </div>
                     </div>
 
 
@@ -207,7 +233,6 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                             Sage
                         </button>
 
-
                         <button
                             class="theme-button"
                             onclick="selectSyntaxTheme('Syntax2')"
@@ -215,14 +240,12 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                             Forest
                         </button>
 
-
                         <button
                             class="theme-button"
                             onclick="selectSyntaxTheme('Syntax3')"
                         >
                             Ocean
                         </button>
-
 
                         <button
                             class="theme-button"
@@ -234,17 +257,17 @@ export class SageViewProvider implements vscode.WebviewViewProvider {
                     </div>
 
 
-                    <br>
-                    <br>
+                    <div style="margin-top: 10px;">
 
+                        <button
+                            class="custom-button"
+                            onclick="createCustomSyntaxTheme()"
+                        >
+                            <span class="icon">⚙</span>
+                            Customize Syntax Colors
+                        </button>
 
-                    <button
-                        class="custom-button"
-                        onclick="createCustomSyntaxTheme()"
-                    >
-                        <span class="icon">⚙</span>
-                        Customize Syntax Colors
-                    </button>
+                    </div>
 
                 </div>
 

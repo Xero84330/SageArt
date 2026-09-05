@@ -13,7 +13,10 @@ export class CostumSyntaxTheme {
             'Custom Syntax Theme',
             vscode.ViewColumn.One,
             {
-                enableScripts: true
+                enableScripts: true,
+                localResourceRoots: [
+                    this.extensionUri
+                ]
             }
         );
 

@@ -1,71 +1,74 @@
-# sage README
+# Sage
 
-This is the README for your extension "sage". After writing up a brief description, we recommend including the following sections.
+A thoughtful, lightweight workspace personalization tool for VS Code.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Whether you prefer a calm dark blue atmosphere or an energetic deep violet, **Sage** lets you instantly swap curated environment palettes or build your own custom IDE and syntax theme with a clean visual color picker—no manual JSON editing needed.
 
 ---
 
-## Following extension guidelines
+## Features
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+### 1. Curated IDE Themes (4 Defaults + 1 Custom)
+Transform your entire editor surface (editor background, sidebars, activity bar, terminal, and status bar) with balanced, distraction-free color harmonies:
+* **Sapphire** (`Theme 1`): Deep ocean tones with crisp modern accents.
+* **Emerald** (`Theme 2`): Calming forest and mint hues that reduce eye strain during long coding sessions.
+* **Onyx** (`Theme 3`): Sleek, refined obsidian-dark minimalism.
+* **Amethyst** (`Theme 4`): Creative, deep purple-infused backdrop for focused night coding.
+* **Create Custom Theme**: Pick your own 5 core colors (`Editor`, `Accent`, `Secondary`, `Text`, `Surface`), and Sage’s built-in color engine will mathematically compute complementary lightness, borders, highlights, and contrast for you. Saved directly to `themes/sage-custom.json`.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+### 2. Tailored Syntax Highlighting (4 Defaults + 1 Custom)
+Fine-tune how your code actually reads on screen:
+* **Sage**: Natural herbal green and soft blue syntax palette.
+* **Forest**: Earthy greens and warm tones for rich syntax recognition.
+* **Ocean**: Cool cyan, azure, and seafoam highlights.
+* **Sunset**: Warm amber and coral tones that make logic and keywords pop.
+* **Customize Syntax Colors**: Want specific colors for keywords, functions, types, strings, or comments? Use the interactive customizer to define your palette. Saved directly into `syntax/sage-custom-syntax.json` and applied to your editor tokens.
 
-## Working with Markdown
+### 3. Integrated Activity Bar Panel
+* Conveniently docked in your Activity Bar under **"Customize your office"**.
+* Features subtle **(i) info buttons** on each section with clear descriptions of what each control affects so you never have to guess.
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+---
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+## How to Use
 
-## For more information
+1. Click on the **Sage** icon in the VS Code Activity Bar (left sidebar).
+2. Under **Select Theme**, click any palette button to switch your overall IDE theme instantly.
+3. Under **Choose Syntax Style**, select your preferred code highlighting style.
+4. To build your own look, click **Create Custom Theme** or **Customize Syntax Colors**, choose your colors in the dedicated panel, and hit **Apply**.
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+---
 
-**Enjoy!**
+## Requirements
+
+* Visual Studio Code version **1.80.0** or newer.
+* No additional external tools or runtime dependencies required.
+
+---
+
+## Extension Settings
+
+Sage adjusts standard VS Code appearance preferences cleanly:
+* `workbench.colorTheme`: Updated when you select or generate an IDE theme.
+* `editor.tokenColorCustomizations`: Updated when you activate syntax styles or save a custom syntax palette.
+
+---
+
+## Known Issues
+
+* If you have existing workspace-level theme overrides defined in `.vscode/settings.json`, they may take priority over global theme selections until cleared.
+
+---
+
+## Release Notes
+
+### 0.0.1
+* Initial release of **Sage**.
+* Added 4 curated workbench themes and an automated Custom Theme Generator.
+* Added 4 distinct syntax highlighting presets and an interactive syntax customizer.
+* Added dedicated sidebar Webview with responsive buttons and interactive info tooltips.
+* Packaged standalone assets (`media/sage.css`, `media/sage.js`, `media/sage.svg`) optimized for production.
+
+---
+
+**Enjoy your new workspace!**
